@@ -1,6 +1,5 @@
 import com.example.Feline;
 import com.example.Lion;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,14 +7,16 @@ import org.junit.runners.Parameterized;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import static org.junit.Assert.assertEquals;
+
 @RunWith(Parameterized.class)
-public class LionTest {
+public class LionTestWithParameters {
     //добавляем поля класса
     private final String sex;
     private final boolean hasMane;
 
     //нужен конструктор
-    public LionTest(String sex, boolean hasMane) {
+    public LionTestWithParameters(String sex, boolean hasMane) {
         this.sex = sex;
         this.hasMane = hasMane;
     }
@@ -32,23 +33,20 @@ public class LionTest {
         return new Object[][]{
                 {"Самец", true},
                 {"Самка", false},
-                {"null", false},
+                {null, false},
                 {"1234567", false}
         };
     }
     @Test
     //теперь нужно проверить исключения если и не Самец и не Самка
-    public void genderLionTestException() throw new Exception {
+    public void constructorLionTest() throws Exception {
         try {
             Lion lion = new Lion(sex, feline);
-            Assert.assertEquals(hasMane, lion.hasMane);
+            assertEquals(hasMane, lion.doesHaveMane());
         }
         catch (Exception exception) {
-            Assert.assertEquals("Используйте допустимые значения пола животного - самец или самка", exception.getMessage()); //получить сообщение об ошибке
+            assertEquals("Используйте допустимые значения пола животного - самец или самка", exception.getMessage()); //получить сообщение об ошибке
         }
     }
-
-
-
 
 }
