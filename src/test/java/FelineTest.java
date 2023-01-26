@@ -5,7 +5,7 @@ import org.junit.Test;
 import java.util.List;
 
 public class FelineTest {
-    private Feline feline = new Feline();
+    private final Feline feline = new Feline();
     @Test
     // с помощью throws - предупреждение об исключении
     public void eatMeatReturnPredatorFood() throws Exception {
@@ -13,19 +13,20 @@ public class FelineTest {
         Assert.assertEquals(felineFood, feline.eatMeat());
     }
     @Test
-    public void getFamilyTest() {
+    public void getFamilyReturnAnswerForFeline() {
         String typeOfAnimal = "Кошачьи";
         //проверяем метод feline.getFamily(), сравниваем, что полученное значение соответствует корркектному - "Кошачьи"(именно его должен вернуть метод в Feline)
         Assert.assertEquals(typeOfAnimal, feline.getFamily());
     }
+
     @Test
-    public void getKittensTest() {
+    public void getKittensCheckWithoutParams() {
         int numberOfKitten = 1;
         //тут проверяем значение "1"
         Assert.assertEquals(numberOfKitten, feline.getKittens());
     }
     @Test
-    public void getKittensTestRandomInt() {
+    public void getKittensCheckWithParams() {
         int numberOfKitten = 77;
         //тут проверяем int значение, например "77"
         Assert.assertEquals(numberOfKitten, feline.getKittens(numberOfKitten));

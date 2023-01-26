@@ -7,7 +7,7 @@ public class Injects {
                 "Самка"
         };
         //объявить зависимость
-        Predator feline = new Feline();
+        Feline feline = new Feline();
         Lion lion = new Lion(sex[0], feline);
 
     }

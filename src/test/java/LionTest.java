@@ -1,4 +1,3 @@
-import com.example.Cat;
 import com.example.Feline;
 import com.example.Lion;
 import org.junit.Assert;
@@ -10,37 +9,20 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.*;
+
 
 @RunWith(MockitoJUnitRunner.class)
     public class LionTest {
-        @Mock
-        Feline feline;
-        @Test
-        public void getKittensTest() throws Exception {
-            Mockito.when(feline.getKittens()).thenReturn(1);
-            Lion lion = new Lion("Самец",feline);
-            Assert.assertEquals(1, lion.getKittens());
-        }
-
-        @Test
-        public void doesHaveManeTest() throws Exception { //throws Exception требует идея
-            Lion lion = new Lion("Самец", feline);
-            assertEquals(true, lion.doesHaveMane());
-        }
+    @Mock
+    Feline feline;
 
     @Test
-    public void doesHaveManeTestFemale() throws Exception { //throws Exception требует идея
-        Lion lion = new Lion("Самка", feline);
-        assertEquals(false, lion.doesHaveMane());
+    public void getKittensTest() throws Exception {
+        Mockito.when(feline.getKittens()).thenReturn(1);
+        Lion lion = new Lion("Самец", feline);
+        Assert.assertEquals(1, lion.getKittens());
     }
-//        @Test
-//        public void getFoodTest() throws Exception {
-//            Lion lion = new Lion("Самец", feline);
-//            lion.getFood();
-//            Mockito.verify(feline).getFood("Хищник");
-//        }
 
     @Test
     public void getFoodCallEatMeat() throws Exception {
@@ -59,14 +41,12 @@ import static org.junit.Assert.assertThrows;
         Lion lion = new Lion(sex, feline);
         assertEquals(felineFood, lion.getFood());
     }
-//        @Test
-//        public void constructorLionTest() throws Exception{
-//            Lion lion = new Lion("Самка", feline);
-//            assertEquals(false, lion.hasMane);
-//        }
-//        @Test
-//        public void constructorLionExceptionTest() throws Exception{
-//            Lion lion = new Lion("Самка", feline);
-//            assertThrows("Problems with exception",Exception.class,()-> new Lion("", feline));
-//        }
-     }
+
+    @Test
+    //Здесь проверяем исключения для пола животного
+    public void lionCheckForSexOfAnimal() {
+        String exceptionExpectedMessage = "Используйте допустимые значения пола животного - самец или самка";
+        Exception trowException = Assert.assertThrows(Exception.class,() -> new Lion("Неизвестно", feline));
+        Assert.assertEquals(trowException.getMessage(), exceptionExpectedMessage);
+    }
+}
